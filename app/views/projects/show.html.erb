@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+
+<p>
+ <strong>Trabajadores:</strong>
+</p>
+
+
+
+
+<% @project.workers.each do |worker|%>
+<%= worker.name %>
+<%= link_to 'Remover'%>
+<br>
+<% end %>
+
+<% form_with(model: @project.workers.build, local: true) do |form|%>
+<% form.select(:worker_id, options_for_select(Worker.pluck(:name, :id))) %>
+<%= form.submit%>
+<% end %>
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
